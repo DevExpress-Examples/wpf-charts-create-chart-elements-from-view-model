@@ -1,0 +1,116 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MvvmSample"
+        xmlns:viewModel="clr-namespace:MvvmSample.ViewModel"
+        xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts" x:Class="MvvmSample.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="405" Width="720">
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
+    <Grid>
+
+        <dxc:ChartControl DataSource="{Binding DataProvider.WeatherInfos}" LegendItemsSource="{Binding Chart.Legends}">
+            <dxc:ChartControl.CrosshairOptions>
+                <dxc:CrosshairOptions ShowOnlyInFocusedPane="False" GroupHeaderPattern="{}{A:d MMMM, hh:mm}"/>
+            </dxc:ChartControl.CrosshairOptions>
+            <dxc:ChartControl.Titles>
+                <dxc:Title Content="Weather in London" HorizontalAlignment="Center"/>
+            </dxc:ChartControl.Titles>
+            <dxc:XYDiagram2D SeriesItemsSource="{Binding Chart.Series}" SecondaryAxisYItemsSource="{Binding Chart.YAxes}" PaneItemsSource="{Binding Chart.Panes}"
+                             EnableAxisXNavigation="True">
+                <dxc:XYDiagram2D.DefaultPane>
+                    <dxc:Pane Visibility="Collapsed"/>
+                </dxc:XYDiagram2D.DefaultPane>
+                <dxc:XYDiagram2D.AxisX>
+                    <dxc:AxisX2D VisibilityInPaneItemsSource="{Binding Chart.Panes}" GridLinesMinorVisible="True" GridLinesVisible="True" Interlaced="True">
+                        <dxc:AxisX2D.VisualRange>
+                            <dxc:Range MinValue="{Binding Chart.XAxis.MinValue}" MaxValue="{Binding Chart.XAxis.MaxValue}"/>
+                        </dxc:AxisX2D.VisualRange>
+                        <dxc:AxisX2D.DateTimeScaleOptions>
+                            <dxc:ManualDateTimeScaleOptions MeasureUnit="Hour" GridAlignment="Hour"/>
+                        </dxc:AxisX2D.DateTimeScaleOptions>
+                        
+                        <dxc:AxisX2D.VisibilityInPaneItemTemplate>
+                            <DataTemplate>
+                                <ContentControl>
+                                    <dxc:VisibilityInPane Pane="{Binding}" Visible="{Binding ShowXAxis}"/>
+                                </ContentControl>
+                            </DataTemplate>
+                        </dxc:AxisX2D.VisibilityInPaneItemTemplate>
+                    </dxc:AxisX2D>
+                </dxc:XYDiagram2D.AxisX>
+                <dxc:XYDiagram2D.AxisY>
+                    <dxc:AxisY2D Visible="False" GridLinesVisible="False" GridLinesMinorVisible="False" Interlaced="False"/>
+                </dxc:XYDiagram2D.AxisY>
+
+                <dxc:XYDiagram2D.SeriesItemTemplateSelector>
+                    <local:SeriesTypeTemplateSelector>
+                        <local:SeriesTypeTemplateSelector.AreaTemplate>
+                            <DataTemplate>
+                                <dxc:AreaSeries2D DisplayName="{Binding Name}" 
+                                                  ArgumentDataMember="{Binding ArgumentName}" ValueDataMember="{Binding ValueName}" 
+                                                  Legend="{Binding Legend}" Pane="{Binding Pane}" AxisY="{Binding YAxis}"
+                                                  CrosshairLabelPattern="{}{V}"/>
+                            </DataTemplate>
+                        </local:SeriesTypeTemplateSelector.AreaTemplate>
+                        <local:SeriesTypeTemplateSelector.BarTemplate>
+                            <DataTemplate>
+                                <dxc:BarSideBySideSeries2D DisplayName="{Binding Name}" 
+                                                  ArgumentDataMember="{Binding ArgumentName}" ValueDataMember="{Binding ValueName}" 
+                                                  Legend="{Binding Legend}" Pane="{Binding Pane}" AxisY="{Binding YAxis}"
+                                                  CrosshairLabelPattern="{}{V}" BarWidth="2"/>
+                            </DataTemplate>
+                        </local:SeriesTypeTemplateSelector.BarTemplate>
+                        <local:SeriesTypeTemplateSelector.LineTemplate>
+                            <DataTemplate>
+                                <dxc:LineSeries2D DisplayName="{Binding Name}" 
+                                                  ArgumentDataMember="{Binding ArgumentName}" ValueDataMember="{Binding ValueName}" 
+                                                  Legend="{Binding Legend}" Pane="{Binding Pane}" AxisY="{Binding YAxis}"
+                                                  CrosshairLabelPattern="{}{V}"/>
+                            </DataTemplate>
+                        </local:SeriesTypeTemplateSelector.LineTemplate>
+                    </local:SeriesTypeTemplateSelector>
+                </dxc:XYDiagram2D.SeriesItemTemplateSelector>
+                <dxc:XYDiagram2D.PaneItemTemplate>
+                    <DataTemplate>
+                        <dxc:Pane>
+                            <dxc:Pane.AxisXScrollBarOptions>
+                                <dxc:ScrollBarOptions Visible="{Binding ShowXAxis}"/>
+                            </dxc:Pane.AxisXScrollBarOptions>
+                        </dxc:Pane>
+                    </DataTemplate>
+                </dxc:XYDiagram2D.PaneItemTemplate>
+                <dxc:XYDiagram2D.SecondaryAxisYItemTemplate>
+                    <DataTemplate>
+                        <dxc:SecondaryAxisY2D Alignment="Near" GridLinesMinorVisible="True" GridLinesVisible="True"
+                                              ConstantLineInFrontItemsSource="{Binding ConstantLines}">
+                            <dxc:SecondaryAxisY2D.WholeRange>
+                                <dxc:Range dxc:AxisY2D.AlwaysShowZeroLevel="False"/>
+                            </dxc:SecondaryAxisY2D.WholeRange>
+                            <dxc:SecondaryAxisY2D.Title>
+                                <dxc:AxisTitle Content="{Binding Title}"/>
+                            </dxc:SecondaryAxisY2D.Title>
+                            <dxc:SecondaryAxisY2D.ConstantLineInFrontItemTemplate>
+                                <DataTemplate>
+                                    <dxc:ConstantLine Title="{Binding Title}" Value="{Binding Value}"/>
+                                </DataTemplate>
+                            </dxc:SecondaryAxisY2D.ConstantLineInFrontItemTemplate>
+                        </dxc:SecondaryAxisY2D>
+                    </DataTemplate>
+                </dxc:XYDiagram2D.SecondaryAxisYItemTemplate>
+            </dxc:XYDiagram2D>
+
+            <dxc:ChartControl.LegendItemTemplate>
+                <DataTemplate>
+                    <dxc:Legend DockTarget="{Binding DockTarget}" HorizontalPosition="Left" VerticalPosition="Top"/>
+                </DataTemplate>
+            </dxc:ChartControl.LegendItemTemplate>
+            
+        </dxc:ChartControl>
+
+    </Grid>
+</Window>
