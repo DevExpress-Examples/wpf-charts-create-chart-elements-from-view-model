@@ -1,54 +1,58 @@
-﻿Imports System
 Imports System.Collections.Generic
-Imports System.Linq
-Imports System.Text
-Imports System.Threading.Tasks
 
 Namespace MvvmSample.ViewModel
+
     Friend Class ChartViewModel
-        Private privatePanes As IEnumerable(Of PaneViewModel)
-        Public Property Panes() As IEnumerable(Of PaneViewModel)
+
+        Private _Panes As IEnumerable(Of MvvmSample.ViewModel.PaneViewModel), _XAxis As XAxisViewModel, _YAxes As IEnumerable(Of MvvmSample.ViewModel.YAxisViewModel), _Series As IEnumerable(Of MvvmSample.ViewModel.SeriesViewModel), _Legends As IEnumerable(Of MvvmSample.ViewModel.LegendViewModel)
+
+        Public Property Panes As IEnumerable(Of PaneViewModel)
             Get
-                Return privatePanes
+                Return _Panes
             End Get
+
             Private Set(ByVal value As IEnumerable(Of PaneViewModel))
-                privatePanes = value
+                _Panes = value
             End Set
         End Property
-        Private privateXAxis As XAxisViewModel
-        Public Property XAxis() As XAxisViewModel
+
+        Public Property XAxis As XAxisViewModel
             Get
-                Return privateXAxis
+                Return _XAxis
             End Get
+
             Private Set(ByVal value As XAxisViewModel)
-                privateXAxis = value
+                _XAxis = value
             End Set
         End Property
-        Private privateYAxes As IEnumerable(Of YAxisViewModel)
-        Public Property YAxes() As IEnumerable(Of YAxisViewModel)
+
+        Public Property YAxes As IEnumerable(Of YAxisViewModel)
             Get
-                Return privateYAxes
+                Return _YAxes
             End Get
+
             Private Set(ByVal value As IEnumerable(Of YAxisViewModel))
-                privateYAxes = value
+                _YAxes = value
             End Set
         End Property
-        Private privateSeries As IEnumerable(Of SeriesViewModel)
-        Public Property Series() As IEnumerable(Of SeriesViewModel)
+
+        Public Property Series As IEnumerable(Of SeriesViewModel)
             Get
-                Return privateSeries
+                Return _Series
             End Get
+
             Private Set(ByVal value As IEnumerable(Of SeriesViewModel))
-                privateSeries = value
+                _Series = value
             End Set
         End Property
-        Private privateLegends As IEnumerable(Of LegendViewModel)
-        Public Property Legends() As IEnumerable(Of LegendViewModel)
+
+        Public Property Legends As IEnumerable(Of LegendViewModel)
             Get
-                Return privateLegends
+                Return _Legends
             End Get
+
             Private Set(ByVal value As IEnumerable(Of LegendViewModel))
-                privateLegends = value
+                _Legends = value
             End Set
         End Property
 
@@ -62,13 +66,16 @@ Namespace MvvmSample.ViewModel
     End Class
 
     Friend Class LegendViewModel
-        Private privateDockTarget As PaneViewModel
-        Public Property DockTarget() As PaneViewModel
+
+        Private _DockTarget As PaneViewModel
+
+        Public Property DockTarget As PaneViewModel
             Get
-                Return privateDockTarget
+                Return _DockTarget
             End Get
+
             Private Set(ByVal value As PaneViewModel)
-                privateDockTarget = value
+                _DockTarget = value
             End Set
         End Property
 
@@ -78,13 +85,16 @@ Namespace MvvmSample.ViewModel
     End Class
 
     Friend Class PaneViewModel
-        Private privateShowXAxis As Boolean
-        Public Property ShowXAxis() As Boolean
+
+        Private _ShowXAxis As Boolean
+
+        Public Property ShowXAxis As Boolean
             Get
-                Return privateShowXAxis
+                Return _ShowXAxis
             End Get
+
             Private Set(ByVal value As Boolean)
-                privateShowXAxis = value
+                _ShowXAxis = value
             End Set
         End Property
 
@@ -94,27 +104,33 @@ Namespace MvvmSample.ViewModel
     End Class
 
     Friend Class XAxisViewModel
-        Public Property MinValue() As Date
-        Public Property MaxValue() As Date
+
+        Public Property MinValue As Date
+
+        Public Property MaxValue As Date
     End Class
 
     Friend Class YAxisViewModel
-        Private privateTitle As String
-        Public Property Title() As String
+
+        Private _Title As String, _ConstantLines As IEnumerable(Of MvvmSample.ViewModel.ConstantLineViewModel)
+
+        Public Property Title As String
             Get
-                Return privateTitle
+                Return _Title
             End Get
+
             Private Set(ByVal value As String)
-                privateTitle = value
+                _Title = value
             End Set
         End Property
-        Private privateConstantLines As IEnumerable(Of ConstantLineViewModel)
-        Public Property ConstantLines() As IEnumerable(Of ConstantLineViewModel)
+
+        Public Property ConstantLines As IEnumerable(Of ConstantLineViewModel)
             Get
-                Return privateConstantLines
+                Return _ConstantLines
             End Get
+
             Private Set(ByVal value As IEnumerable(Of ConstantLineViewModel))
-                privateConstantLines = value
+                _ConstantLines = value
             End Set
         End Property
 
@@ -125,59 +141,68 @@ Namespace MvvmSample.ViewModel
     End Class
 
     Friend Class SeriesViewModel
-        Public Property Name() As String
-        Private privateArgumentName As String
-        Public Property ArgumentName() As String
+
+        Private _ArgumentName As String, _ValueName As String, _Legend As LegendViewModel, _Pane As PaneViewModel, _YAxis As YAxisViewModel, _Type As SeriesType
+
+        Public Property Name As String
+
+        Public Property ArgumentName As String
             Get
-                Return privateArgumentName
+                Return _ArgumentName
             End Get
+
             Private Set(ByVal value As String)
-                privateArgumentName = value
+                _ArgumentName = value
             End Set
         End Property
-        Private privateValueName As String
-        Public Property ValueName() As String
+
+        Public Property ValueName As String
             Get
-                Return privateValueName
+                Return _ValueName
             End Get
+
             Private Set(ByVal value As String)
-                privateValueName = value
+                _ValueName = value
             End Set
         End Property
-        Private privateLegend As LegendViewModel
-        Public Property Legend() As LegendViewModel
+
+        Public Property Legend As LegendViewModel
             Get
-                Return privateLegend
+                Return _Legend
             End Get
+
             Private Set(ByVal value As LegendViewModel)
-                privateLegend = value
+                _Legend = value
             End Set
         End Property
-        Private privatePane As PaneViewModel
-        Public Property Pane() As PaneViewModel
+
+        Public Property Pane As PaneViewModel
             Get
-                Return privatePane
+                Return _Pane
             End Get
+
             Private Set(ByVal value As PaneViewModel)
-                privatePane = value
+                _Pane = value
             End Set
         End Property
-        Private privateYAxis As YAxisViewModel
-        Public Property YAxis() As YAxisViewModel
+
+        Public Property YAxis As YAxisViewModel
             Get
-                Return privateYAxis
+                Return _YAxis
             End Get
+
             Private Set(ByVal value As YAxisViewModel)
-                privateYAxis = value
+                _YAxis = value
             End Set
         End Property
-        Private privateType As SeriesType
-        Public Property Type() As SeriesType
+
+        Public Property Type As SeriesType
             Get
-                Return privateType
+                Return _Type
             End Get
+
             Private Set(ByVal value As SeriesType)
-                privateType = value
+                _Type = value
             End Set
         End Property
 
@@ -193,22 +218,26 @@ Namespace MvvmSample.ViewModel
     End Class
 
     Friend Class ConstantLineViewModel
-        Private privateTitle As String
-        Public Property Title() As String
+
+        Private _Title As String, _Value As Double
+
+        Public Property Title As String
             Get
-                Return privateTitle
+                Return _Title
             End Get
+
             Private Set(ByVal value As String)
-                privateTitle = value
+                _Title = value
             End Set
         End Property
-        Private privateValue As Double
-        Public Property Value() As Double
+
+        Public Property Value As Double
             Get
-                Return privateValue
+                Return _Value
             End Get
+
             Private Set(ByVal value As Double)
-                privateValue = value
+                _Value = value
             End Set
         End Property
 
@@ -216,7 +245,6 @@ Namespace MvvmSample.ViewModel
             Me.Title = title
             Me.Value = value
         End Sub
-
     End Class
 
     Public Enum SeriesType
