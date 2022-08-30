@@ -6,7 +6,7 @@
 
 # Chart for WPF - Bind a Chart to Its View Model
 
-This example shows how to use the MVVM design pattern to create a multi-pane chart, and add a separate series, legend, and a y-axis to each pane.
+This example shows how to use the MVVM design pattern to create a multi-pane chart, and add a separate series, legend, and y-axis to each pane.
 
 ![Resulting chart](Images/resulting-image.png)
 
