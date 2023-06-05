@@ -14,7 +14,7 @@ To create chart elements from the ViewModel, use the `~ItemsSource` property to 
 
 For example, to create chart legends, use the [ChartControlBase.LegendItemsSource](https://docs.devexpress.com/WPF/DevExpress.Xpf.Charts.ChartControlBase.LegendItemsSource?p=netframework) and [ChartControlBase.LegendItemTemplate](https://docs.devexpress.com/WPF/DevExpress.Xpf.Charts.ChartControlBase.LegendItemTemplate?p=netframework) properties.
 
-## Files to Look At
+## Files to Review
 
 * [MainWindow.xaml](./CS/MvvmSample/View/MainWindow.xaml) (VB: [MainWindow.xaml](./VB/MvvmSample/View/MainWindow.xaml))
 * [MainWindow.xaml.cs](./CS/MvvmSample/View/MainWindow.xaml.cs) (VB: [MainWindow.xaml.vb](./VB/MvvmSample/View/MainWindow.xaml.vb))
