@@ -96,7 +96,11 @@
                             </dxc:SecondaryAxisY2D.Title>
                             <dxc:SecondaryAxisY2D.ConstantLineInFrontItemTemplate>
                                 <DataTemplate>
-                                    <dxc:ConstantLine Title="{Binding Title}" Value="{Binding Value}"/>
+                                    <dxc:ConstantLine Value="{Binding Value}">
+                                        <dxc:ConstantLine.Title>
+                                            <dxc:ConstantLineTitle Content="{Binding Title}"/>
+                                        </dxc:ConstantLine.Title>
+                                    </dxc:ConstantLine>
                                 </DataTemplate>
                             </dxc:SecondaryAxisY2D.ConstantLineInFrontItemTemplate>
                         </dxc:SecondaryAxisY2D>
